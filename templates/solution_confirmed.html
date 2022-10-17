@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sudoku Solution Page</title>
+
+    <!-- Bring in library -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" integrity="sha256-xkEoWEC2R3sOXaM8jnaKT43guoCyTbkiGAFratj9x1Q=" crossorigin="anonymous"></script> -->
+    <!-- Manual Style file -->
+    <style>
+        body {background-color:rgb(211, 188, 146); margin-top: 1%;}
+        h1 {padding: 2%; text-align: center;font-weight: bold; color:rgb(231, 61, 31);}
+        .container.custom-container {margin-top: 5%;}
+    </style>
+   
+   <!-- Javascript to get board -->
+    <script type="text/javascript">
+        var confirmed_data = {{ data|tojson }}
+        if (confirmed_data[2] === false){alert("Invalid Puzzles:\n@Ensure to check the puzzles based on instructions.")} ;
+     </script>
+</head>
+
+<body>
+    <!-- First part: header-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1>Confirm Your Puzzle & Get Solutions!</h1>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Second part:Input form to correct it -->  
+    <div class="container">
+        <div class="row">
+            <form  action="/solve_puzzle" method="POST" class="mx-auto" style="width: 50%;">
+                <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Check puzzle based on below instructions" name="modification">
+                <button class="btn btn-outline-secondary" type="submit" id="button-addon2" value="submit">Submit</button>
+                </div>
+            </form>  
+        </div>
+    </div>
+
+    <!-- Third part: Instruction of inputting -->
+    <div class="container">
+        <div class="row">
+            <img src="../static/images/instruction/instruction.png" class="mx-auto" style="width: 80%;">
+        </div>
+    </div>
+
+    <!-- Fourth Part: Outout area -->  
+    <div class="custom-container container">
+        <div class="row">
+            <!-- area for user's uploading image -->
+            <div class="col-md-6"><img src={{path}} class="mx-auto" style="width: 50%;"></div>
+            <div class="col-md-6">
+                <!-- area for D3 output code -->
+                <strong><p class="mx-auto">Try CLICK to highlight cells</p></strong>
+                <div id="grid"></div>
+            </div>
+        </div>
+    </div>
+        
+<!-- link to the test JS file -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/app_confirmed.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
