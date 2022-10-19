@@ -1,12 +1,13 @@
 
 import os
 from flask import Flask, request, render_template, jsonify, session
-from read_puzzle import export_result
-from sudokuSolver import solveSudoku
+from .read_puzzle import export_result
+from .sudokuSolver import solveSudoku
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-app.config['UPLOAD_PATH'] = 'static/images'
+# app.config['UPLOAD_PATH'] = 'static/images'
+app.config['UPLOAD_PATH'] = 'project-4-group-5/static/images'
 app.secret_key = "qh7djvl;3gffwkkdkkdwkhgsomdddd\\\\\\dcywk"
 
 @app.route("/")
